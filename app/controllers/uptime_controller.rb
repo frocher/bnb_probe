@@ -1,4 +1,3 @@
-require 'tempfile'
 
 class UptimeController < ApplicationController
 
@@ -8,7 +7,6 @@ class UptimeController < ApplicationController
 
   def index
     url = sanitized_url
-    headerFile = Tempfile.new('twb')
 
     easy = Curl::Easy.new
     easy.follow_location = true
