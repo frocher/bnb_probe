@@ -2,8 +2,8 @@ require 'tempfile'
 
 class CheckController < ApplicationController
   def index
-    url = params[:url]
-    # TODO : sanitize url
+    url = sanitized_url
+
     jsonFile = Tempfile.new('twb')
     harFile = Tempfile.new('twb')
     cmd = "browsertime -u #{url} -n 1 --filename #{jsonFile.path} --harFile #{harFile.path}"
