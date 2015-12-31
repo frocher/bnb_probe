@@ -37,9 +37,10 @@ default-jre-headless \
 git \
 libicu52 \
 nodejs \
+libcurl3 libcurl3-gnutls libsqlite3-dev \
+libcurl4-openssl-dev \
 build-essential --no-install-recommends && \
 npm install -g browsertime && npm cache clean && \
-apt-get purge -y curl git build-essential && \
 apt-get clean autoclean && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -47,5 +48,13 @@ ADD ./scripts/ /home/root/scripts
 
 ENTRYPOINT ["/home/root/scripts/start.sh"]
 
-VOLUME /browsertime
-WORKDIR /browsertime
+ENV APP_HOME /twb_probe
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+ADD Gemfile* $APP_HOME/
+RUN bundle install
+
+ADD . $APP_HOME
+
+EXPOSE 3000
