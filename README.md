@@ -11,7 +11,8 @@
 
 ### Quicklaunch for Development
 
-docker run -P -t twb_probe bundle exec rails s -p 3000 -b '0.0.0.0'
+docker run -p 3000:3000 -d twb_probe bundle exec rails s -p 3000 -b '0.0.0.0'
+docker run -p 3333:3000 -it twb_probe bundle exec rails s -p 3000 -b '0.0.0.0'
 
 ```sh
 bundle install
