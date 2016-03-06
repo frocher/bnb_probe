@@ -4,6 +4,22 @@ ENV LC_ALL C
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
 
+
+# firefox
+RUN \
+apt-get update && \
+apt-get install -y \
+firefox \
+ca-certificates \
+xfonts-100dpi \
+xfonts-75dpi \
+xfonts-scalable \
+xfonts-cyrillic \
+xvfb --no-install-recommends && \
+apt-get clean autoclean && \
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# chrome
 RUN \
 apt-get update && \
 apt-get install -y wget unzip && \
@@ -28,6 +44,7 @@ google-chrome-stable && \
 apt-get clean autoclean && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# browsertime
 RUN \
 apt-get update && \
 apt-get install -y curl && \

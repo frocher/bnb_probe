@@ -1,9 +1,11 @@
 #!/bin/bash
 set -e
 date
+
 # print versions
 chromedriver --version
 google-chrome-stable --version
+firefox --version 2>/dev/null
 
 echo 'Starting Xvfb ...'
 export DISPLAY=:99
