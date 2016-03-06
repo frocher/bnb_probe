@@ -6,7 +6,8 @@ class CheckController < ApplicationController
 
     jsonFile = Tempfile.new('twb')
     harFile = Tempfile.new('twb')
-    cmd = "browsertime -u #{url} -n 1 --filename #{jsonFile.path} --harFile #{harFile.path}"
+    browser = Rails.configuration.browser
+    cmd = "browsertime -u #{url} -b #{browser} -n 1 --filename #{jsonFile.path} --harFile #{harFile.path}"
     stdout,stderr,status = Open3.capture3(cmd)
     if status.success?
       render json: {stats: JSON.parse(jsonFile.read), har: JSON.parse(harFile.read)}

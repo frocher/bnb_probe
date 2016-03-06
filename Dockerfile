@@ -5,20 +5,6 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
 
 
-# firefox
-RUN \
-apt-get update && \
-apt-get install -y \
-firefox \
-ca-certificates \
-xfonts-100dpi \
-xfonts-75dpi \
-xfonts-scalable \
-xfonts-cyrillic \
-xvfb --no-install-recommends && \
-apt-get clean autoclean && \
-rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
 # chrome
 RUN \
 apt-get update && \
@@ -41,6 +27,13 @@ xvfb --no-install-recommends && \
 apt-get purge -y wget unzip && \
 apt-get install -y \
 google-chrome-stable && \
+apt-get clean autoclean && \
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# firefox
+RUN \
+apt-get update && \
+apt-get install -y firefox --no-install-recommends && \
 apt-get clean autoclean && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
