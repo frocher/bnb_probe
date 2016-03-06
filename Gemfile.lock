@@ -88,7 +88,6 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
-    spring (1.4.0)
     sprockets (3.3.4)
       rack (~> 1.0)
     sprockets-rails (2.3.3)
@@ -109,8 +108,7 @@ DEPENDENCIES
   jbuilder
   rails (= 4.2.3)
   rails-api
-  spring
   sqlite3
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
