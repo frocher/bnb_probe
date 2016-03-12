@@ -10,10 +10,10 @@
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
 
-# Although this is not needed for an api-only application, rails4 
-# requires secret_key_base or secret_token to be defined, otherwise an 
+# Although this is not needed for an api-only application, rails4
+# requires secret_key_base or secret_token to be defined, otherwise an
 # error is raised.
 # Using secret_token for rails3 compatibility. Change to secret_key_base
 # to avoid deprecation warning.
 # Can be safely removed in a rails3 api-only application.
-TwbProbe::Application.config.secret_token = '8166c5a237206a04b8185750545f7bb8cbe1deceb3efa074fd02165c73e5524f07cbc19b7492eb0d15efe4036b289ce3cc527fcf1907d319ec13abb0bd757200'
+BnbProbe::Application.config.secret_token = '8166c5a237206a04b8185750545f7bb8cbe1deceb3efa074fd02165c73e5524f07cbc19b7492eb0d15efe4036b289ce3cc527fcf1907d319ec13abb0bd757200'

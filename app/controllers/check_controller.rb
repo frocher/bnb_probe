@@ -4,8 +4,8 @@ class CheckController < ApplicationController
   def index
     url = sanitized_url
 
-    jsonFile = Tempfile.new('twb')
-    harFile = Tempfile.new('twb')
+    jsonFile = Tempfile.new('bnb')
+    harFile = Tempfile.new('bnb')
     browser = Rails.configuration.browser
     cmd = "browsertime -u #{url} -b #{browser} -n 1 --filename #{jsonFile.path} --harFile #{harFile.path}"
     stdout,stderr,status = Open3.capture3(cmd)

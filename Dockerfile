@@ -58,12 +58,12 @@ ADD ./scripts/ /home/root/scripts
 
 ENTRYPOINT ["/home/root/scripts/start.sh"]
 
-ENV APP_HOME /twb_probe
+ENV APP_HOME /bnb_probe
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
 ADD Gemfile* $APP_HOME/
-RUN bundle install
+RUN bundle install --without development test
 
 ADD . $APP_HOME
 
