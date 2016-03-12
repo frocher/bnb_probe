@@ -33,7 +33,7 @@ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # firefox
 RUN \
 apt-get update && \
-apt-get install -y firefox --no-install-recommends && \
+apt-get install -y --no-install-recommends iceweasel libgl1-mesa-dri libvdpau-va-gl1 va-driver-all fonts-dejavu && \
 apt-get clean autoclean && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
