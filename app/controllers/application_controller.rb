@@ -24,7 +24,11 @@ protected
     probe_token = Rails.configuration.probe_token
     unless probe_token.nil?
       token = params[:token]
-      forbidden! if token.nil? or token != probe_token
+      if token.nil? or token != probe_token
+        logger.error "Invalid token: #{token}"
+        forbidden!
+      end
+
     end
   end
 
