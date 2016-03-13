@@ -20,5 +20,20 @@ protected
     url = ActionController::Base.helpers.sanitize(url)
   end
 
+  def check_token
+    probe_token = Rails.configuration.probe_token
+    unless probe_token.nil?
+      token = params[:token]
+      forbidden! if token.nil? or token != probe_token
+    end
+  end
+
+  def forbidden!
+    render_api_error!('403 Forbidden', 403)
+  end
+
+  def render_api_error!(message, status)
+    render json: { message: message}, status: status
+  end
 
 end

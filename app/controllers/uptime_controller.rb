@@ -1,9 +1,9 @@
 
 class UptimeController < ApplicationController
+  before_action :check_token
 
   def index
     url = sanitized_url
-
 
     easy = Curl::Easy.new
     easy.follow_location = true

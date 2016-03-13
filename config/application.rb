@@ -23,6 +23,12 @@ module BnbProbe
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
+    # Chrome is the default browser but firefox can be defined
     config.browser = ENV['PROBE_BROWSER'] || 'chrome'
+
+    # You can define a token to restrict access to the probe
+    # If probe token is nil, no access restriction is applied
+    # If token is defined, the token must be passed as a 'token' parameter
+    config.probe_token = ENV['PROBE_TOKEN']
   end
 end

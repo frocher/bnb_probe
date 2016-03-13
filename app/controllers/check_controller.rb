@@ -1,6 +1,8 @@
 require 'tempfile'
 
 class CheckController < ApplicationController
+  before_action :check_token
+  
   def index
     url = sanitized_url
     target = params[:target]
