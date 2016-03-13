@@ -10,7 +10,4 @@ gem 'jbuilder'
 # curl access
 gem 'curb'
 
-# Database : not used. TODO : to remove
-gem 'sqlite3'
-
 gem 'puma'
