@@ -2,7 +2,7 @@ require 'tempfile'
 
 class CheckController < ApplicationController
   before_action :check_token
-  
+
   def index
     url = sanitized_url
     target = params[:target]
@@ -19,16 +19,25 @@ class CheckController < ApplicationController
 
     jsonFile = Tempfile.new('bnb')
     harFile = Tempfile.new('bnb')
-    browser = Rails.configuration.browser
-    cmd = "browsertime -u #{url} -b #{browser} -w #{size} --connection #{connection} -n 1 --filename #{jsonFile.path} --harFile #{harFile.path}"
-    Rails.logger.info cmd
-    stdout,stderr,status = Open3.capture3(cmd)
-    if status.success?
-      render json: {stats: JSON.parse(jsonFile.read), har: JSON.parse(harFile.read)}
-    else
-      render json: { status: "error"}, status: 422
-      Rails.logger.error stdout
-      Rails.logger.error stderr
+    begin
+      browser = Rails.configuration.browser
+      cmd = "browsertime -u #{url} -b #{browser} -w #{size} --connection #{connection} -n 1 --filename #{jsonFile.path} --harFile #{harFile.path}"
+      Rails.logger.info cmd
+      stdout,stderr,status = Open3.capture3(cmd)
+      if status.success?
+        render json: {stats: JSON.parse(jsonFile.read), har: JSON.parse(harFile.read)}
+      else
+        render json: { status: "error"}, status: 422
+        Rails.logger.error stdout
+        Rails.logger.error stderr
+      end
+    rescue => e
+      render json: {status: "failed", errorMessage: e.to_s}, status: 422
+    ensure
+      jsonFile.close
+      jsonFile.unlink
+      harFile.close
+      harFile.unlink
     end
   end
 end
