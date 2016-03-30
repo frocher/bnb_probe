@@ -31,7 +31,7 @@ class UptimeController < ApplicationController
       render json: {status: "success"}, status: 200
     else
       easy.body_str.force_encoding('UTF-8')
-      render json: {status: "failed", errorMessage: error_message, content: JSON.generate(easy.body_str, quirks_mode: true)}, status: 200
+      render json: {status: "failed", errorMessage: error_message, content: easy.body_str}, status: 200
     end
 
   rescue => e
