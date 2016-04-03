@@ -34,10 +34,8 @@ class CheckController < ApplicationController
     rescue => e
       render json: {status: "failed", errorMessage: e.to_s}, status: 422
     ensure
-      jsonFile.close
-      jsonFile.unlink
-      harFile.close
-      harFile.unlink
+      jsonFile.close!
+      harFile.close!
     end
   end
 end
