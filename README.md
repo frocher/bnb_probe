@@ -19,7 +19,8 @@ This application is written with Ruby on Rails and uses different tools :
 
 ### Quickstart (without Docker)
 
-You'll need to install a lot of things. Just look at the Dockerfile to see what to do.
+You'll need to install a lot of things. Just look at the Dockerfile to see what to do (and good luck to you).
+
 
 ```sh
 bundle install
