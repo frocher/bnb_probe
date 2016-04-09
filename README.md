@@ -9,8 +9,8 @@ You can also request a simple uptime monitoring with something like this : http:
 
 This application is written with Ruby on Rails and uses different tools :
 
-* Node.js: for Browsertime
-* Ruby 2.3: for Ror
+* Node.js: used by Browsertime (see below)
+* Ruby 2.3: for [Ruby on Rails](http://rubyonrails.org/)
 * curl: for uptime monitoring
 * Browsertime: the great tool that does all the heavy work (http://tobli.github.io/browsertime/)
 * Google Chrome and Google Chrome Driver : if you want to use Chrome as your test browser
@@ -39,10 +39,11 @@ docker-compose build
 docker-compose up
 ```
 
-
-
 ### Configuration
 
 the BotnBot Probe uses the following environment variables :
 
 * PROBE_BROWSER : name of the browser to use for statistics checks. Default is 'chrome' but you can also use 'firefox'.
+* PROBE_TOKEN : You can define a token to restrict access to the probe. If probe token is undefined, no access restriction is applied otherwise the token must be passed as a 'token' parameter.
+
+This software uses the Figaro gem. you can define this variables using an application.yml file or using environment variables.

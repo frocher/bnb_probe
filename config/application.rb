@@ -25,11 +25,11 @@ module BnbProbe
     # config.i18n.default_locale = :de
 
     # Chrome is the default browser but firefox can be defined
-    config.browser = ENV['PROBE_BROWSER'] || 'chrome'
+    config.browser = Figaro.env.PROBE_BROWSER || 'chrome'
 
     # You can define a token to restrict access to the probe
     # If probe token is nil, no access restriction is applied
     # If token is defined, the token must be passed as a 'token' parameter
-    config.probe_token = ENV['PROBE_TOKEN']
+    config.probe_token = Figaro.env.PROBE_TOKEN
   end
 end

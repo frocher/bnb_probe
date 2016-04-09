@@ -10,4 +10,8 @@ gem 'jbuilder'
 # curl access
 gem 'curb'
 
+# Configuration
+gem 'figaro'
+
+# Use puma as the app server
 gem 'puma'
