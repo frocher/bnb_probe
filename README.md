@@ -47,3 +47,30 @@ the BotnBot Probe uses the following environment variables :
 * PROBE_TOKEN : You can define a token to restrict access to the probe. If probe token is undefined, no access restriction is applied otherwise the token must be passed as a 'token' parameter.
 
 This software uses the Figaro gem. you can define this variables using an application.yml file or using environment variables.
+
+### API Documentation
+
+#### Uptime
+
+```sh
+http://your_domain/uptime?url=<url>&token=<token>&keyword=<keyword>&type=<type>
+```
+
+| Param   | Mandatory | Description  |
+| --------|:---------:| -----|
+| url     | yes       | URL to check (e.g. http://www.google.com)|
+| token   | no        | Secret token used to restrict access |
+| keyword | no        | Check if a keyword is present or absent depending on the type parameter |
+| type    | no        |  Can be 'presence' or 'absence'. Default is 'presence' |
+
+#### Check
+
+```sh
+http://your_domain/check?url=<url>&token=<token>&target=<target>
+```
+
+| Param  | Mandatory | Description  |
+| -------|:---------:| -----|
+| url    | yes       | URL to check (e.g. http://www.google.com)|
+| token  | no        | Secret token used to restrict access |
+| target | no        | 'desktop' or 'mobile'. If desktop simulate a cable connection, if mobile a 3g connection. Default is 'desktop' |
