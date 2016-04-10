@@ -23,14 +23,13 @@ class CheckController < ApplicationController
       browser = Rails.configuration.browser
       cmd = "browsertime -u #{url} -b #{browser} -w #{size} --connection #{connection} -n 1 --filename #{jsonFile.path} --harFile #{harFile.path}"
       Rails.logger.info cmd
-      stdout,stderr,status = Open3.capture3_with_timeout(cmd, :timeout => 90, :kill_after => true)
-      #stdout,stderr,status = Open3.capture3_with_timeout(cmd)
-      if status.success?
+      result = capture3_with_timeout(cmd, :timeout => 90, :kill_after => true)
+      if result[:status]
         render json: {stats: JSON.parse(jsonFile.read), har: JSON.parse(harFile.read)}
       else
         render json: { status: "error"}, status: 422
-        Rails.logger.error stdout
-        Rails.logger.error stderr
+        Rails.logger.error result[:stdout]
+        Rails.logger.error result[:stderr]
       end
     rescue => e
       render json: {status: "failed", errorMessage: e.to_s}, status: 422
