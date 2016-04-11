@@ -53,7 +53,7 @@ This software uses the Figaro gem. you can define this variables using an applic
 
 #### Uptime
 
-```sh
+```
 http://your_domain/uptime?url=<url>&token=<token>&keyword=<keyword>&type=<type>
 ```
 
@@ -66,7 +66,7 @@ http://your_domain/uptime?url=<url>&token=<token>&keyword=<keyword>&type=<type>
 
 #### Check
 
-```sh
+```
 http://your_domain/check?url=<url>&token=<token>&target=<target>
 ```
 
