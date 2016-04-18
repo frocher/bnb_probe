@@ -10,6 +10,7 @@ class UptimeController < ApplicationController
     easy.max_redirects = 3
     easy.useragent = "curb"
     easy.url = url
+    easy.timeout = 30
     easy.perform
 
     error_message = nil
