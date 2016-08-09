@@ -1,4 +1,4 @@
-FROM ruby:2.3.0-slim
+FROM ruby:2.3-slim
 
 ENV LC_ALL C
 ENV DEBIAN_FRONTEND noninteractive
@@ -11,7 +11,7 @@ apt-get update && \
 apt-get install -y wget unzip && \
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
   echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
-wget -N http://chromedriver.storage.googleapis.com/2.21/chromedriver_linux64.zip && \
+wget -N http://chromedriver.storage.googleapis.com/2.23/chromedriver_linux64.zip && \
 unzip chromedriver_linux64.zip && \
 rm chromedriver_linux64.zip && \
 chmod +x chromedriver && \
