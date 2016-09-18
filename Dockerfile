@@ -50,7 +50,7 @@ nodejs \
 libcurl3 libcurl3-gnutls libsqlite3-dev \
 libcurl4-openssl-dev \
 build-essential --no-install-recommends && \
-npm install -g browsertime && npm cache clean && \
+npm install -g browsertime@0.12 && npm cache clean && \
 apt-get clean autoclean && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
