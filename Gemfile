@@ -1,11 +1,7 @@
 source 'https://rubygems.org'
 
 
-gem 'rails', '4.2.5.1'
-
-# API
-gem 'rails-api'
-gem 'jbuilder'
+gem 'rails', '~> 5.1.0'
 
 # curl access
 gem 'curb'
