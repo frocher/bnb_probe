@@ -3,11 +3,16 @@ set -e
 date
 
 # print versions
-chromedriver --version
 google-chrome-stable --version
-firefox --version 2>/dev/null
+firefox --version
 
-echo 'Starting Xvfb ...'
-export DISPLAY=:99
-2>/dev/null 1>&2 Xvfb :99 -shmem -screen 0 1366x768x16 &
+sudo rm -f /var/lib/dbus/machine-id
+sudo mkdir -p /var/run/dbus
+sudo service dbus restart > /dev/null
+service dbus status > /dev/null
+export $(dbus-launch)
+export NSS_USE_SHARED_DB=ENABLED
+
+rm -f tmp/pids/server.pid
+
 exec "$@"

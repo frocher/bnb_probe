@@ -8,11 +8,11 @@ class CheckController < ApplicationController
     connection = ""
     size = ""
     if target == "mobile"
-      connection = "mobilefast3g"
-      size = "357x627"
+      connection = "3gfast"
+      size = "360x640"
     else
       connection = "cable"
-      size = "1280x1024"
+      size = "1366x768"
     end
 
     basedir = Rails.root.join('tmp');
@@ -22,7 +22,7 @@ class CheckController < ApplicationController
 
     begin
       browser = Rails.configuration.browser
-      cmd = "browsertime #{url} --output #{filename} --har #{filename} --resultDir #{basedir} -n 1 -b #{browser} --viewPort #{size} -c #{connection}"
+      cmd = "browsertime #{url} --output #{filename} --har #{filename} --resultDir #{basedir} -n 1 -b #{browser} --viewPort #{size} -c #{connection} --speedIndex"
       Rails.logger.info cmd
       status = system(cmd)
       if status
@@ -33,6 +33,8 @@ class CheckController < ApplicationController
         render json: { status: "error"}, status: 422
       end
     rescue => e
+      logger.error e.message
+      e.backtrace.each { |line| logger.error line }
       render json: {status: "failed", errorMessage: e.to_s}, status: 422
     ensure
       File.delete(json_filename) if File.exist?(json_filename)
@@ -46,10 +48,12 @@ class CheckController < ApplicationController
     json_file.close
 
     timings = output["statistics"]["timings"]
+    visual = output["statistics"]["visualMetrics"]
+
     stats = {
       responseStart: timings["navigationTiming"]["responseStart"]["median"].to_i,
-      firstPaint: timings["firstPaint"]["median"].to_i,
-      speedIndex: timings["rumSpeedIndex"]["median"].to_i,
+      firstPaint: visual["FirstVisualChange"]["median"].to_i,
+      speedIndex: visual["SpeedIndex"]["median"].to_i,
       domInteractive: timings["navigationTiming"]["domInteractive"]["median"].to_i,
       pageLoadTime: timings["fullyLoaded"]["median"].to_i,
     }
