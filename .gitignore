@@ -5,6 +5,7 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 browsertime-results/
+node_modules/
 .DS_Store
 
 # Ignore bundler config.

@@ -52,6 +52,9 @@ google-chrome-stable && \
 apt-get clean autoclean && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# lighthouse
+RUN npm install -g lighthouse
+
 # firefox
 RUN \
 apt-get update && \
@@ -82,6 +85,9 @@ ENTRYPOINT ["/home/root/scripts/start.sh"]
 ENV APP_HOME /bnb_probe
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
+
+# har utility
+RUN npm install ./scripts
 
 # Create app
 ADD Gemfile* $APP_HOME/

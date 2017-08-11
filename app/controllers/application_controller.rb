@@ -14,6 +14,19 @@ class ApplicationController < ActionController::API
 
 protected
 
+  def tmp_filename(extension)
+    basedir = Rails.root.join('tmp');
+    filename = SecureRandom.uuid
+    File.join(basedir, filename + extension)
+  end
+
+  def generate_report(filename)
+    json_file = File.open(filename)
+    output = JSON.parse(json_file.read)
+    json_file.close
+    output
+  end
+  
   def sanitized_url
     url = params[:url]
     url = URI.escape(url)
