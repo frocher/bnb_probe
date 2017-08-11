@@ -30,7 +30,7 @@ rails s -b 0.0.0.0
 ### Quickstart (the Docker way)
 
 ```sh
-docker run -p 3333:3000 -d probe bundle exec rails s -p 3000
+docker run -p 3333:3000 -d probe npm start
 ```
 
 or if docker-compose is installed
@@ -44,10 +44,9 @@ docker-compose up
 
 the BotnBot Probe uses the following environment variables :
 
-* PROBE_BROWSER : name of the browser to use for statistics checks. Default is 'chrome' but you can also use 'firefox'.
 * PROBE_TOKEN : You can define a token to restrict access to the probe. If probe token is undefined, no access restriction is applied otherwise the token must be passed as a 'token' parameter.
 
-This software uses the Figaro gem. you can define this variables using an application.yml file or using environment variables.
+This software uses the dotenv module. You can define this variables using a .env file or using environment variables.
 
 ### API Documentation
 
@@ -64,14 +63,24 @@ http://your_domain/uptime?url=<url>&token=<token>&keyword=<keyword>&type=<type>
 | keyword | no        | Check if a keyword is present or absent depending on the type parameter |
 | type    | no        |  Can be 'presence' or 'absence'. Default is 'presence' |
 
-#### Check
+#### HAR
 
 ```
-http://your_domain/check?url=<url>&token=<token>&target=<target>
+http://your_domain/har?url=<url>&token=<token>
 ```
 
-| Param  | Mandatory | Description  |
-| -------|:---------:| -----|
-| url    | yes       | URL to check (e.g. http://www.google.com)|
-| token  | no        | Secret token used to restrict access |
-| target | no        | 'desktop' or 'mobile'. If desktop simulate a cable connection, if mobile a 3g connection. Default is 'desktop' |
+| Param   | Mandatory | Description  |
+| --------|:---------:| -----|
+| url     | yes       | URL to check (e.g. http://www.google.com)|
+| token   | no        | Secret token used to restrict access |
+
+#### Lighthouse
+
+```
+http://your_domain/lighthouse?url=<url>&token=<token>
+```
+
+| Param   | Mandatory | Description  |
+| --------|:---------:| -----|
+| url     | yes       | URL to check (e.g. http://www.google.com)|
+| token   | no        | Secret token used to restrict access |
