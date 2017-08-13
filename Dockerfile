@@ -1,33 +1,33 @@
-FROM frocher/bnb_base
+FROM ubuntu:16.04
 
+### Install utilites
+
+RUN apt-get update --fix-missing && apt-get -y upgrade &&\
+apt-get install -y sudo curl wget unzip git
+
+### Install node
+
+RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - &&\
+sudo apt-get install -y nodejs
 
 # chrome
-RUN \
-apt-get update && \
-apt-get install -y wget sudo && \
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-  echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
-apt-get update && apt-get install -y \
-ca-certificates \
-x11vnc \
-libgl1-mesa-dri \
-xfonts-100dpi \
-xfonts-75dpi \
-xfonts-scalable \
-xfonts-cyrillic \
-dbus-x11 \
-xvfb --no-install-recommends && \
-apt-get purge -y wget && \
-apt-get install -y \
-google-chrome-stable && \
-apt-get clean autoclean && \
-rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - &&\
+sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' &&\
+sudo apt-get update &&\
+sudo apt-get install -y google-chrome-stable
 
-ENV APP_HOME /bnb_probe
+# Add Chrome as a user
+RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
+    && mkdir -p /home/chrome && chown -R chrome:chrome /home/chrome
+
+# Run Chrome non-privileged
+USER chrome
+
+# Create app
+ENV APP_HOME /home/chrome/bnb_probe
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
-# Create app
 ADD package* $APP_HOME/
 RUN npm install
 
