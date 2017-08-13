@@ -2,35 +2,30 @@
 
 The Botnbot Probe is a standalone application that returns different statistics about an url.
 
-You can request statistics about a given url with a HTTP command like this : http://localhost:3333/check?url=https://www.github.com.
+You can request lighthouse statistics about a given url with a HTTP command like this : http://localhost:3333/lighthouse?url=https://www.github.com.
 You can also request a simple uptime monitoring with something like this : http://localhost:3333/uptime?url=https://www.github.com
 
 ### Dependencies
 
-This application is written with Ruby on Rails and uses different tools :
+This application is written with NodeJS and uses different tools :
 
-* Node.js: used by Browsertime (see below)
-* Ruby 2.3: for [Ruby on Rails](http://rubyonrails.org/)
-* curl: for uptime monitoring
-* Browsertime: the great tool that does all the heavy work (http://tobli.github.io/browsertime/)
-* Google Chrome and Google Chrome Driver : if you want to use Chrome as your test browser
-* Firefox : if you want to use Firefox as your test browser
-
+* Node.js
+* Google Chrome
 
 ### Quickstart (without Docker)
 
-You'll need to install a lot of things. Just look at the Dockerfile to see what to do (and good luck to you).
+You'll need to install Chrome. Just look at the Dockerfile to see what to do (and good luck to you).
 
 
 ```sh
-bundle install
-rails s -b 0.0.0.0
+npm install
+npm start
 ```
 
 ### Quickstart (the Docker way)
 
 ```sh
-docker run -p 3333:3000 -d probe npm start
+docker run -p 3333:3000 --cap-add=ALL
 ```
 
 or if docker-compose is installed
