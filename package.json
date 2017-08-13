@@ -1,7 +1,16 @@
 {
   "name": "bnb-probe",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "Botnbot Probe",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frocher/bnb_probe.git"
+  },
+  "homepage": "https://github.com/frocher/bnb_probe#readme",
+  "bugs": {
+    "url": "https://github.com/frocher/bnb_probe/issues"
+  },
   "scripts": {
     "start": "node ./bin/www"
   },
