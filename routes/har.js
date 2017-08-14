@@ -3,7 +3,7 @@ const chc = require('chrome-har-capturer');
 const express = require('express');
 const router = express.Router();
 
-function launchChrome(headless=true) {
+function launchChrome(headless = true) {
   return chromeLauncher.launch({
     chromeFlags: [
       '--disable-gpu',
@@ -12,7 +12,7 @@ function launchChrome(headless=true) {
   });
 }
 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   launchChrome()
     .then(chrome => {
       console.log(`Chrome debuggable on port: ${chrome.port}`);
@@ -42,7 +42,7 @@ router.get('/', function(req, res, next) {
           res.status(500).send({error: 'Error generating har'});
           chrome.kill();
         });
-    })
+    });
 });
 
 module.exports = router;

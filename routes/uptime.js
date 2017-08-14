@@ -1,26 +1,25 @@
-var express = require('express');
-var router = express.Router();
-var request = require('superagent');
-
+const express = require('express');
+const router = express.Router();
+const request = require('superagent');
 
 function checkKeyword(data, keyword, checkType) {
-  return checkType === "presence" ? data.indexOf(keyword) !== -1 : data.indexOf(keyword) === -1;
+  return checkType === 'presence' ? data.indexOf(keyword) !== -1 : data.indexOf(keyword) === -1;
 }
 
 function doubleCheck() {
   return new Promise( (resolve, reject) => {
     request.get('https://www.google.com')
       .set('Cache-Control', 'no-cache,no-store,must-revalidate,max-age=-1,private')
-      .end(function(err, res) {
+      .end(function (err, res) {
         resolve(res.status < 300);
       });
   });
 }
 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   request.get(req.query.url)
     .set('Cache-Control', 'no-cache,no-store,must-revalidate,max-age=-1,private')
-    .end(function(err, result) {
+    .end(function (err, result) {
       if (!result || result.status >= 300) {
         doubleCheck().then(isCheck => {
           if (isCheck) {
@@ -32,18 +31,18 @@ router.get('/', function(req, res, next) {
             }
           }
           else {
-            res.send({status: "success"});
+            res.send({status: 'success'});
           }
         });
       }
       else {
         if (!req.query.keyword) {
-          res.send({status: "success"});
+          res.send({status: 'success'});
         }
         else {
-          let checkType = req.query.type || "presence";
+          let checkType = req.query.type || 'presence';
           if (checkKeyword(result.text, req.query.keyword, checkType)) {
-            res.send({status: "success"});
+            res.send({status: 'success'});
           }
           else {
             res.send({status: 'failed', errorMessage: `Check of ${checkType} of ${req.query.keyword} failed.`, content: result.text});
