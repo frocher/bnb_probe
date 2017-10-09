@@ -56,7 +56,7 @@ http://your_domain/uptime?url=<url>&token=<token>&keyword=<keyword>&type=<type>
 | url     | yes       | URL to check (e.g. http://www.google.com)|
 | token   | no        | Secret token used to restrict access |
 | keyword | no        | Check if a keyword is present or absent depending on the type parameter |
-| type    | no        |  Can be 'presence' or 'absence'. Default is 'presence' |
+| type    | no        | Can be 'presence' or 'absence'. Default is 'presence' |
 
 #### HAR
 
@@ -79,3 +79,4 @@ http://your_domain/lighthouse?url=<url>&token=<token>
 | --------|:---------:| -----|
 | url     | yes       | URL to check (e.g. http://www.google.com)|
 | token   | no        | Secret token used to restrict access |
+| type    | no        | Can be 'html' or 'json'. Default is 'json' |
