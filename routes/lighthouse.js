@@ -9,9 +9,6 @@ function launchChromeAndRunLighthouse(url, flags = {}, config = null) {
     flags.port = chrome.port;
     return lighthouse(url, flags, config).then(results =>
       chrome.kill().then(() => {
-        if (flags.output !== Printer.OutputMode.json) {
-          return Printer.createOutput(results, flags.output)
-        }
         return results;
       }));
   });
@@ -20,16 +17,27 @@ function launchChromeAndRunLighthouse(url, flags = {}, config = null) {
 router.get('/', function (req, res, next) {
   const flags = {};
 
-  let type = req.query.type || 'json';
-  if (type === 'html') {
-    flags.output = Printer.OutputMode.html;
-  }
-  else {
-    flags.output = Printer.OutputMode.json;
-  }
-
   launchChromeAndRunLighthouse(req.query.url, flags)
     .then(results => {
+      const pwa = Math.round(results['reportCategories'][0]['score']);
+      const performance = Math.round(results['reportCategories'][1]['score']);
+      const accessibility = Math.round(results['reportCategories'][2]['score']);
+      const bestPractices = Math.round(results['reportCategories'][3]['score']);
+      res.setHeader('X-Lighthouse-scores', `${pwa};${performance};${accessibility};${bestPractices}`);
+
+      const audits = results['audits'];
+      const ttfb = Math.round(audits['time-to-first-byte']['rawValue']);
+      const firstMeaningfulPaint = Math.round(audits['first-meaningful-paint']['rawValue']);
+      const firstInteractive = Math.round(audits['first-interactive']['rawValue']);
+      const speedIndex = Math.round(audits['speed-index-metric']['rawValue']);
+      res.setHeader('X-Lighthouse-metrics', `${ttfb};${firstMeaningfulPaint};${firstInteractive};${speedIndex}`);
+
+
+      let type = req.query.type || 'json';
+      if (type === 'html') {
+        results = Printer.createOutput(results, Printer.OutputMode.html)
+      }
+
       res.send(results);
     })
     .catch(e => {
