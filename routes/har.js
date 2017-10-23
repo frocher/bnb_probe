@@ -15,8 +15,6 @@ function launchChrome(headless = true) {
 router.get('/', function (req, res, next) {
   launchChrome()
     .then(chrome => {
-      console.log(`Chrome debuggable on port: ${chrome.port}`);
-
       let opts = {port: chrome.port};
       let urls = [req.query.url];
 
