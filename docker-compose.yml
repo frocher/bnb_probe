@@ -3,7 +3,6 @@ services:
   probe:
     build: .
     container_name: botnbot_probe
-    restart: on-failure
     cap_add:
       - ALL
     shm_size: 1G
