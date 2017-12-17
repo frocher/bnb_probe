@@ -80,3 +80,16 @@ http://your_domain/lighthouse?url=<url>&token=<token>
 | url     | yes       | URL to check (e.g. http://www.google.com)|
 | token   | no        | Secret token used to restrict access |
 | type    | no        | Can be 'html' or 'json'. Default is 'json' |
+
+#### Screenshot
+
+```
+http://your_domain/screenshot?url=<url>&token=<token>
+```
+
+| Param   | Mandatory | Description  |
+| --------|:---------:| -----|
+| url     | yes       | URL to check (e.g. http://www.google.com)|
+| token   | no        | Secret token used to restrict access |
+| width   | no        | Screenshot width in pixels. Default is 1024 |
+| height  | no        | Screenshot height in pixels. Default is 768 |
