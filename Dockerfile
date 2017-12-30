@@ -28,7 +28,6 @@ ENV APP_HOME /home/chrome/bnb_probe
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 ADD package* $APP_HOME/
 RUN npm install
 
