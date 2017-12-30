@@ -8,9 +8,7 @@ function launchChromeAndRunLighthouse(url, flags = {}, config = null) {
   return chromeLauncher.launch({chromeFlags: ['--disable-gpu', '--headless']}).then(chrome => {
     flags.port = chrome.port;
     return lighthouse(url, flags, config).then(results =>
-      chrome.kill().then(() => {
-        return results;
-      }));
+      chrome.kill().then(() => results));
   });
 }
 
@@ -32,6 +30,7 @@ router.get('/', function (req, res, next) {
       const speedIndex = Math.round(audits['speed-index-metric']['rawValue']);
       res.setHeader('X-Lighthouse-metrics', `${ttfb};${firstMeaningfulPaint};${firstInteractive};${speedIndex}`);
 
+      delete results.artifacts;
 
       let type = req.query.type || 'json';
       if (type === 'html') {
