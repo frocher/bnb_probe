@@ -21,7 +21,8 @@ router.get('/', function (req, res, next) {
       const performance = Math.round(results['reportCategories'][1]['score']);
       const accessibility = Math.round(results['reportCategories'][2]['score']);
       const bestPractices = Math.round(results['reportCategories'][3]['score']);
-      res.setHeader('X-Lighthouse-scores', `${pwa};${performance};${accessibility};${bestPractices}`);
+      const seo = Math.round(results['reportCategories'][4]['score']);
+      res.setHeader('X-Lighthouse-scores', `${pwa};${performance};${accessibility};${bestPractices};${seo}`);
 
       const audits = results['audits'];
       const ttfb = Math.round(audits['time-to-first-byte']['rawValue']);
