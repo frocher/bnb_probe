@@ -35,7 +35,7 @@ router.get('/', function (req, res, next) {
 
       let type = req.query.type || 'json';
       if (type === 'html') {
-        results = Printer.createOutput(results, Printer.OutputMode.html)
+        results = Printer.createOutput(results, Printer.OutputMode.html);
       }
 
       res.send(results);
