@@ -16,15 +16,15 @@
   },
   "dependencies": {
     "chrome-har-capturer": "^0.10.0",
-    "chrome-launcher": "^0.8.0",
-    "compression": "^1.7.1",
-    "debug": "^2.6.9",
+    "chrome-launcher": "^0.10.0",
+    "compression": "^1.7.0",
+    "debug": "^3.1.0",
     "dotenv": "^4.0.0",
-    "express": "^4.16.2",
-    "lighthouse": "^2.7.0",
-    "morgan": "~1.8.1",
-    "puppeteer": "^0.13.0",
-    "superagent": "^3.8.1"
+    "express": "^4.16.0",
+    "lighthouse": "^2.9.0",
+    "morgan": "~1.9.0",
+    "puppeteer": "^1.1.0",
+    "superagent": "^3.8.0"
   },
   "devDependencies": {
     "eslint": "^4.11.0",
