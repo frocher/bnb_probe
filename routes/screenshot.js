@@ -7,8 +7,8 @@ router.get('/', function (req, res, next) {
   puppeteer.launch().then(async browser => {
     const page = await browser.newPage();
     page.setViewport({
-      width: req.param('width') ? parseInt(req.param('width'), 10) : 1024,
-      height: req.param('height') ? parseInt(req.param('height'), 10) : 768
+      width: req.params.width ? parseInt(req.params.width, 10) : 1024,
+      height: req.params.heigh ? parseInt(req.params.height, 10) : 768
     });
     await page.goto(req.query.url, {timeout: 60000});
     const shot = await page.screenshot({});
