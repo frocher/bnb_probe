@@ -11,7 +11,7 @@ function doubleCheck() {
     request.get('https://www.google.com')
       .set('Cache-Control', 'no-cache,no-store,must-revalidate,max-age=-1,private')
       .end(function (err, res) {
-        resolve(res.status < 300);
+        resolve(res && res.status < 300);
       });
   });
 }
