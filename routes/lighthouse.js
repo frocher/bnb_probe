@@ -17,8 +17,8 @@ router.get('/', function (req, res, next) {
 
   launchChromeAndRunLighthouse(req.query.url, flags)
     .then(results => {
-      const pwa = Math.round(results['reportCategories'][0]['score']);
-      const performance = Math.round(results['reportCategories'][1]['score']);
+      const performance = Math.round(results['reportCategories'][0]['score']);
+      const pwa = Math.round(results['reportCategories'][1]['score']);
       const accessibility = Math.round(results['reportCategories'][2]['score']);
       const bestPractices = Math.round(results['reportCategories'][3]['score']);
       const seo = Math.round(results['reportCategories'][4]['score']);
