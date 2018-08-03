@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const chromeLauncher = require('chrome-launcher');
 const lighthouse = require('lighthouse');
-const Printer = require('lighthouse/lighthouse-cli/printer.js');
+const ReportGenerator = require('lighthouse/lighthouse-core/report/report-generator.js');
 
 function launchChromeAndRunLighthouse(url, flags = {}, config = null) {
   return chromeLauncher.launch({chromeFlags: ['--disable-gpu', '--headless']}).then(chrome => {
@@ -17,25 +17,27 @@ router.get('/', function (req, res, next) {
 
   launchChromeAndRunLighthouse(req.query.url, flags)
     .then(results => {
-      const performance = Math.round(results['reportCategories'][0]['score']);
-      const pwa = Math.round(results['reportCategories'][1]['score']);
-      const accessibility = Math.round(results['reportCategories'][2]['score']);
-      const bestPractices = Math.round(results['reportCategories'][3]['score']);
-      const seo = Math.round(results['reportCategories'][4]['score']);
+
+      const categories = results['lhr']['categories'];
+      const performance = Math.round(categories['performance']['score'] * 100);
+      const pwa = Math.round(categories['pwa']['score'] * 100);
+      const accessibility = Math.round(categories['accessibility']['score'] * 100);
+      const bestPractices = Math.round(categories['best-practices']['score'] * 100);
+      const seo = Math.round(categories['seo']['score'] * 100);
       res.setHeader('X-Lighthouse-scores', `${pwa};${performance};${accessibility};${bestPractices};${seo}`);
 
-      const audits = results['audits'];
+      const audits = results['lhr']['audits'];
       const ttfb = Math.round(audits['time-to-first-byte']['rawValue']);
       const firstMeaningfulPaint = Math.round(audits['first-meaningful-paint']['rawValue']);
-      const firstInteractive = Math.round(audits['first-interactive']['rawValue']);
-      const speedIndex = Math.round(audits['speed-index-metric']['rawValue']);
-      res.setHeader('X-Lighthouse-metrics', `${ttfb};${firstMeaningfulPaint};${firstInteractive};${speedIndex}`);
+      const interactive = Math.round(audits['interactive']['rawValue']);
+      const speedIndex = Math.round(audits['speed-index']['rawValue']);
+      res.setHeader('X-Lighthouse-metrics', `${ttfb};${firstMeaningfulPaint};${interactive};${speedIndex}`);
 
-      delete results.artifacts;
+      delete results.lhr.artifacts;
 
       let type = req.query.type || 'json';
       if (type === 'html') {
-        results = Printer.createOutput(results, Printer.OutputMode.html);
+        results = ReportGenerator.generateReportHtml(results.lhr);
       }
 
       res.send(results);

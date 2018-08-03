@@ -21,7 +21,7 @@
     "debug": "^3.1.0",
     "dotenv": "^4.0.0",
     "express": "^4.16.3",
-    "lighthouse": "^2.9.4",
+    "lighthouse": "^3.0.0",
     "morgan": "~1.9.0",
     "puppeteer": "^1.2.0",
     "superagent": "^3.8.0"
