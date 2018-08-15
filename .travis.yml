@@ -1,3 +1,9 @@
 language: node_js
 node_js:
   - '7'
+branches:
+  only:
+    - master
+    - develop
+before_install:
+  - docker build -t frocher/bnb_probe .
