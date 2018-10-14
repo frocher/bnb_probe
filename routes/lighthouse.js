@@ -14,6 +14,7 @@ function launchChromeAndRunLighthouse(url, flags = {}, config = null) {
 
 router.get('/', function (req, res, next) {
   const flags = {};
+  flags.emulatedFormFactor = req.query.emulation || 'mobile';
 
   launchChromeAndRunLighthouse(req.query.url, flags)
     .then(results => {
