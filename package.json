@@ -16,14 +16,14 @@
   },
   "dependencies": {
     "chrome-har-capturer": "^0.10.0",
-    "chrome-launcher": "^0.10.4",
+    "chrome-launcher": "^0.10.5",
     "compression": "^1.7.3",
-    "debug": "^3.2.5",
+    "debug": "^3.2.6",
     "dotenv": "^4.0.0",
-    "express": "^4.16.3",
-    "lighthouse": "^3.1.1",
+    "express": "^4.16.4",
+    "lighthouse": "^3.2.1",
     "morgan": "^1.9.1",
-    "puppeteer": "^1.8.0",
+    "puppeteer": "^1.9.0",
     "superagent": "^3.8.3"
   },
   "devDependencies": {
