@@ -15,8 +15,11 @@ function launchChrome(headless = true) {
 router.get('/', function (req, res, next) {
   launchChrome()
     .then(chrome => {
-      let opts = {port: chrome.port};
-      let urls = [req.query.url];
+      const opts = {port: chrome.port};
+      const emulation = req.query.emulation || 'mobile';
+      opts.width = emulation === 'mobile' ? 412 : 1350;
+      opts.height = emulation === 'mobile' ? 732 : 940;
+      const urls = [req.query.url];
 
       res.type('application/json');
 
@@ -26,7 +29,7 @@ router.get('/', function (req, res, next) {
         })
         .on('har', (har) => {
           if (!res.headersSent) {
-            let json = JSON.stringify(har, null, 4);
+            const json = JSON.stringify(har, null, 4);
             res.send(json);
           }
         })
