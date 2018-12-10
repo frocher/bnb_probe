@@ -19,12 +19,16 @@ function doubleCheck() {
 router.get('/', function (req, res, next) {
   request.get(req.query.url)
     .set('Cache-Control', 'no-cache,no-store,must-revalidate,max-age=-1,private')
+    .timeout({ response: 10000, deadline: 60000 })
     .end(function (err, result) {
       if (!result || result.status >= 300) {
         doubleCheck().then(isCheck => {
           if (isCheck) {
             if (result) {
               res.send({status: 'failed', errorMessage: `Status code failed : ${result.status}`, content: result.text});
+            }
+            else if (err.timeout) {
+              res.send({status: 'failed', errorMessage: `Can't check ${req.query.url}. Connection timeout (response > 10s).`});
             }
             else {
               res.send({status: 'failed', errorMessage: `Can't check ${req.query.url}. Code: ${err.code}`});
