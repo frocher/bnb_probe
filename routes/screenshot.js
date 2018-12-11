@@ -4,7 +4,8 @@ const puppeteer = require('puppeteer');
 
 
 router.get('/', function (req, res, next) {
-  puppeteer.launch().then(async browser => {
+  const chromePath = process.env.CHROME_PATH || '/usr/bin/google-chrome';
+  puppeteer.launch({executablePath: chromePath}).then(async browser => {
     const page = await browser.newPage();
     const emulation = req.query.emulation || 'mobile';
     const defaultWidth = emulation === 'mobile' ? 412 : 1280;

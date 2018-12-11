@@ -40,6 +40,7 @@ docker-compose up
 the BotnBot Probe uses the following environment variables :
 
 * PROBE_TOKEN : You can define a token to restrict access to the probe. If probe token is undefined, no access restriction is applied otherwise the token must be passed as a 'token' parameter.
+* CHROME_PATH : Needed for screenshots made with pupeeter. Default is /usr/bin/google-chrome.
 
 This software uses the dotenv module. You can define this variables using a .env file or using environment variables.
 
