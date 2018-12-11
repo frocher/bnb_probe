@@ -94,5 +94,5 @@ http://your_domain/screenshot?url=<url>&token=<token>
 | url     | yes       | URL to check (e.g. http://www.google.com)|
 | token   | no        | Secret token used to restrict access |
 | emulation | no      | Can be 'mobile' or 'desktop'. Default is 'mobile' |
-| width   | no        | Screenshot width in pixels. Default is 1350 for desktop and 412 for mobile |
-| height  | no        | Screenshot height in pixels. Default is 940 for desktop and 732 for mobile |
+| width   | no        | Screenshot width in pixels. Default is 1280 for desktop and 412 for mobile |
+| height  | no        | Screenshot height in pixels. Default is 960 for desktop and 732 for mobile |
