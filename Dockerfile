@@ -7,7 +7,7 @@ apt-get install -y sudo curl wget unzip git
 
 ### Install node
 
-RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - &&\
+RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - &&\
 sudo apt-get install -y nodejs
 
 # chrome
