@@ -21,10 +21,10 @@
     "debug": "^3.2.6",
     "dotenv": "^4.0.0",
     "express": "^4.16.4",
-    "lighthouse": "^3.2.1",
+    "lighthouse": "4.0.0-beta",
     "morgan": "^1.9.1",
-    "puppeteer": "^1.9.0",
-    "superagent": "^3.8.3"
+    "puppeteer": "^1.11.0",
+    "superagent": "^4.0.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
