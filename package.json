@@ -23,7 +23,7 @@
     "express": "^4.16.4",
     "lighthouse": "^4.2.0",
     "morgan": "^1.9.1",
-    "puppeteer": "^1.11.0",
+    "puppeteer": "^1.13.0",
     "superagent": "^4.0.0"
   },
   "devDependencies": {
