@@ -28,10 +28,10 @@ router.get('/', function (req, res, next) {
       res.setHeader('X-Lighthouse-scores', `${pwa};${performance};${accessibility};${bestPractices};${seo}`);
 
       const audits = results['lhr']['audits'];
-      const ttfb = Math.round(audits['time-to-first-byte']['rawValue']);
-      const firstMeaningfulPaint = Math.round(audits['first-meaningful-paint']['rawValue']);
-      const interactive = Math.round(audits['interactive']['rawValue']);
-      const speedIndex = Math.round(audits['speed-index']['rawValue']);
+      const ttfb = Math.round(audits['time-to-first-byte']['numericValue']);
+      const firstMeaningfulPaint = Math.round(audits['first-meaningful-paint']['numericValue']);
+      const interactive = Math.round(audits['interactive']['numericValue']);
+      const speedIndex = Math.round(audits['speed-index']['numericValue']);
       res.setHeader('X-Lighthouse-metrics', `${ttfb};${firstMeaningfulPaint};${interactive};${speedIndex}`);
 
       delete results.lhr.artifacts;
