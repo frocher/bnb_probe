@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "chrome-har-capturer": "^0.10.0",
-    "chrome-launcher": "^0.10.7",
+    "chrome-launcher": "^0.13.1",
     "compression": "^1.7.4",
     "debug": "^3.2.6",
     "dotenv": "^4.0.0",
